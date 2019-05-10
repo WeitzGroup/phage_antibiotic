@@ -33,7 +33,7 @@ saveas(gcf,[pwd '/figures/time_series/Fig2B'],'epsc')
 clear
 
 % Fig. 3 Phage-Antibiotic combination therapy + Immune response
-% Caption: Outcomes of the phage-antibiotic combination therapy model for 
+% Caption: Outcomes of the phage-antibiotic combination therapy model for  
 % two different infection settings. We simulate the combined effects of phage and 
 % antibiotics in an immunocompetent host infected with phage-sensitive bacteria (a), 
 % BP (orange solid line). In (b), the host is infected with antibiotic-sensitive bacteria,
@@ -68,9 +68,9 @@ clear
 % tested against two different bacterial inoculum. The first inoculum consisted of exclusively phage-sensitive 
 % bacteria (a-c), BP (orange solid line). The second inoculum consisted of antibiotic-sensitive bacteria (d-f),
 % BA (green solid line). Additionally, we test three different models of phage infection, heterogeneous mixing (a, d),
-% phage saturation (b, e) and linear infection models (c, f). The initial bacterial density and phage dose are,
+% phage saturation (b,e) and linear infection models (c, f). The initial bacterial density and phage dose are,
 % B_0 = 7.4x10^7 CFU/g and P_0 = 7.4x10^8 PFU/g, respectively. Ciprofloxacin is maintained at a 
-% constant concentration of 2.5xMIC (i.e., 0.0350 ug/ml) during the simulations.
+% constant concentration of 2.5 x MIC (i.e., 0.0350 ug/ml) during the simulations.
 
 % Fig. 4A
 figure(5)
@@ -115,15 +115,15 @@ saveas(gcf,[pwd '/figures/time_series/Fig4F'],'epsc')
 clear
 
 % Fig. 5 Robustness analyis of the phage-antibiotic combination therapy model
-% Caption: \textbf{Outcomes of the robustness analysis for different antimicrobial strategies}.
+% Caption: Outcomes of the robustness analysis for different antimicrobial strategies.
 % We simulate the exposure of bacteria to different antimicrobial strategies, such as antibiotic-only (a),
 % antibiotic + innate immunity (b),  phage + antibiotic (c), and phage-antibiotic combination in presence of 
 % innate immunity (d). The heatmaps show the bacterial density at 96 hours post infection. Colored regions represent
-% bacteria persistence (e.g., blue areas \(\sim\)\(10^{9}\) CFU/g and yellow areas \(\sim\)\(10^{10}\) CFU/g) while 
-% the white regions represent pathogen clearance. We vary the concentration of ciprofloxacin (MIC = 0.014 \(\mu\)g/ml), 
-% ranging from 0.1 MIC (0.0014 \(\mu\)g/ml) to 10 MIC (0.14 \(\mu\)g/ml), and the bacterial composition of the inoculum 
-% ranging from 100\% phage-sensitive bacteria (0\% \(B_A\)) to 100\% antibiotic-sensitive bacteria (100\% \(B_A\)). Initial 
-% bacterial density and phage dose (c-d) are, \(B_{0} = 7.4\times10^7\) CFU/g and \(P_{0} = 7.4\times10^8\) PFU/g, respectively. 
+% bacteria persistence (e.g., blue areas ~ 10^9 CFU/g and yellow areas ~10^10 CFU/g) while 
+% the white regions represent pathogen clearance. We vary the concentration of ciprofloxacin (MIC = 0.014 ug/ml), 
+% ranging from 0.1 MIC (0.0014 ug/ml) to 10 MIC (0.14 ug/ml), and the bacterial composition of the inoculum 
+% ranging from 100% phage-sensitive bacteria (0% BA) to 100% antibiotic-sensitive bacteria (100% BA). Initial 
+% bacterial density and phage dose (c-d) are, B0 = 7.4x10^7 CFU/g and P0 = 7.4x10^8 PFU/g, respectively. 
 % Phage and antibiotic are administered two hours after the beginning of the infection.
 
 % Fig. 5A
@@ -157,13 +157,13 @@ clear
 
 %% Supplementary figures
 
-% Fig. S1
+% Fig. S1 Bacterial dynamics of the partial resistance model
 % Caption: Time series of the partial resistance model in presence and absence of host immune response. We simulate
 % the combination of phage and antibiotic against a phage-sensitive (a) and an antibiotic-sensitive (b) bacterial inoculum in the
 % absence of the immune response. Moreover, we simulate a within-host scenario where the combined therapy interact with the
 % immune response (purple dashed line) and phage-sensitive bacteria (c) or antibiotic-sensitive bacteria (d). Here, phage (blue
-% dashed line) and antibiotic are administered two hours after the infection. Initial conditions are, B0 = 7:4  107 CFU/g and
-% P0 = 7:4108 PFU/g. The concentration of antibiotic (0.0350 g=ml = 2.5MIC for BA strain) is maintained constant during
+% dashed line) and antibiotic are administered two hours after the infection. Initial conditions are, B0 = 7.4 x 10^7 CFU/g and
+% P0 = 7.4x 10^8 PFU/g. The concentration of antibiotic (0.0350 ug/ml = 2.5 x MIC for BA strain) is maintained constant during
 % the simulation, data not shown. The simulation run was 96 hours (4 days).
 
 % Fig. S1A
@@ -194,17 +194,16 @@ saveas(gcf, [pwd '/figures/time_series/FigS1D'], 'fig')
 saveas(gcf,[pwd '/figures/time_series/FigS1D'],'epsc')
 clear
 
-% Fig S2.
-% Caption: Bacteria grew for 96 hours
-% exposed to diferent antimicrobial strategies, antibiotic-only (a), antibiotic + innate immunity (b), phages and antibiotic (c),
+% Fig S2. Robustness analysis of the partial resistance model
+% Caption: Bacteria grew for 96 hours exposed to diferent antimicrobial strategies, antibiotic-only (a), antibiotic + innate immunity (b), phages and antibiotic (c),
 % and phage-antibiotic combination plus active innate immunity (d). The heatmaps show the bacterial density at 96 hours post
 % infection. Colored regions represent bacteria persistence while the clearance of the infection is represented by white regions.
-% For the partial resistance model, phage can infect BA with an infection constant of P , being P = 0:1. Moreover, the phagesensitive
-% strain, BP , is slightly sensitive to the antibiotic with an MIC of 0.172 g/ml. We simulate different concentrations
-% of ciprofloxacin (CP); using the MIC of CP for the BA strain as a reference (MIC = 0.014 g/ml). Fold changes in MIC go
-% from 0.1 MIC (0.014 g/ml) to 10 MIC (0.14 g/ml). Furthermore, bacterial composition of the inoculum ranges from 100%
+% For the partial resistance model, phage can infect BA with an infection constant of \phi\delta_P , being \delta_P = 0.1. Moreover, the phagesensitive
+% strain, BP , is slightly sensitive to the antibiotic with an MIC of 0.172 ug/ml. We simulate different concentrations
+% of ciprofloxacin (CP); using the MIC of CP for the BA strain as a reference (MIC = 0.014 ug/ml). Fold changes in MIC go
+% from 0.1 MIC (0.014 ug/ml) to 10 MIC (0.14 ug/ml). Furthermore, bacterial composition of the inoculum ranges from 100%
 % phage-sensitive bacteria (0% BA) to 100% antibiotic-sensitive bacteria (100% BA). Initial bacterial density and phage dose
-% (c-d) are, B0 = 7:4  107 CFU/g and P0 = 7:4  108 PFU/g, respectively. Phage and antibiotic are administered two hours
+% (c-d) are, B0 = 7.4 x 10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g, respectively. Phage and antibiotic are administered two hours
 % after the beginning of the infection.
 
 
