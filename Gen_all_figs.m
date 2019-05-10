@@ -1,5 +1,5 @@
 % This code generates all the model-related non-schematic figures in the
-% paper Rodriguez-Gonzalez, et al., Quantiative Models of
+% paper Rodriguez-Gonzalez, et al., Quantitative Models of
 % Phage-Antibiotics Combination Therapy, bioRxiv 2019
 
 clear
