@@ -11,7 +11,7 @@ As we show, combination therapy outperforms either phage or antibiotic alone and
 
 Code Usage
 =========================
-All the scripts used to generate article's figure are written in MATLAB (R2018b). Furthermore, the code was reviewed internally using MATLAB (R2019a).
+All the scripts used to generate article's figures are written in MATLAB (R2018b). Furthermore, the code was reviewed internally using MATLAB (R2019a).
 
 1. Run the script 'Gen_all_figs.m' outside the 'code_comb_therapy' directory to generate the figures from the article as well as supplementary figures. Moreover, the figures will be automatically saved in 'fig' and 'epsc' format inside a 'figures' directory.
 
