@@ -1,6 +1,5 @@
 % This code generates all the model-related non-schematic figures in the
-% paper Rodriguez-Gonzalez, et al., Quantiative Models of
-% Phage-Antibiotics Combination Therapy, bioRxiv 2019
+% manuscript: "Quantitative Models of Phage-Antibiotics Combination Therapy", Rodriguez-Gonzalez et al. biorxiv 633784 (2019).
 
 clear
 clc
