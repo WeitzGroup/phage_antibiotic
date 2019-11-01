@@ -89,7 +89,7 @@ function [y, TB, time ] = simRHM_WT(Ki, immune, Bp, Ba, phage, varargin)
     y0 = [Bo;Ro;Po;Io;Ao];
 
     % simulating diff eq until time to add phage (2hrs)
-    options = odeset('Events',@myEventsFcn);
+    options = odeset('Events',@myEventsFcn, 'RelTol', 1e-8);
     [t1,y1] = ode45(@rhmODE,tspan,y0,options,p);
 
     %----------------------------------------
@@ -139,7 +139,7 @@ function [y, TB, time ] = simRHM_WT(Ki, immune, Bp, Ba, phage, varargin)
         P2 = y2(end,3);
         I2 = y2(end,4);
         A2 = y2(end,5);
-        tspan3 = currentTime:96;
+        tspan3 = currentTime:0.05:96;
         yii = [B2;R2;P2;I2;A2];
 
         % simulating diff eq
@@ -171,9 +171,33 @@ function [y, TB, time ] = simRHM_WT(Ki, immune, Bp, Ba, phage, varargin)
 
         % simulating diff eq
         [t4,y4] = ode45(@rhmODE,tspan4,yiii,options,p);
+        
+        currentTime3 = t4(end);
+        
+        if currentTime3 <= 95
+               B4 = y4(end,1);
+            if B4 <= 1
+                B4 = 0;
+            end
+            R4 = y4(end,2);
+            if R4 <= 1
+                R4 = 0;
+            end
+            P4 = y4(end,3);
+            I4 = y4(end,4);
+            A4 = y4(end,5);
+            tspan5 = currentTime3:96;
+            yiiii = [B4;R4;P4;I4;A4];
+
+            % simulating diff eq
+            [t5, y5] = ode45(@rhmODE,tspan5,yiiii,options,p);
+            t4 = [t4; t5];
+            y4 = [y4; y5];                    
+        end
 
         time = [t1(1:end-1); t2; t3; t4];
         y = [y1(1:end-1, :); y2; y3; y4];
+        
     elseif check == 1
         time = [t1(1:end-1); t2; t3];
         y = [y1(1:end-1,:); y2; y3];

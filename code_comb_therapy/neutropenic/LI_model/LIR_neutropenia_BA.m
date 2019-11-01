@@ -20,12 +20,6 @@ P = 7.4e8; % phage treatment
 dose = 0.014*2.5; % ug/ml, 2.5 x MIC of ciprofloxacin for BA strain
 anti_name = 'CP';
 
-% Antibiotic parameters for Ceftazidime
-
-%suggested_dosage = [0:10:600]*0.025;
-%dose = suggested_dosage(7);
-%dosing_interval = 1;
-%anti_name = 'CAZ';
 
 
 % Simulate phage-antibiotic combination therapy model in the absence of
@@ -104,4 +98,4 @@ set(gca,'FontSize',20,'fontweight','bold')
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
 title({"Phages + Antibiotic against B_{A} inoculum"; "Linear infection model"}, 'FontSize', 20)
-
+text(0.02, 0.95, 'f)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')

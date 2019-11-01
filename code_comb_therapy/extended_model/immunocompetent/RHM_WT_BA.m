@@ -21,12 +21,6 @@ dose = 0.014*2.5; % ug/ml, 2.5 x MIC of ciprofloxacin for BA strain
 anti_name = 'CP';
 
 
-% Antibiotic parameters for Ceftazidime
-%suggested_dosage = [0:10:600]*0.025;
-%dose = suggested_dosage(1);
-%dosing_interval = 0;
-%anti_name = 'CAZ';
-
 delta_P = 1/10; % phage resistance parameter for BA strain 
 %                 (i.e., 1/10 of the phage adsorption rate of BP strain)
 
@@ -80,11 +74,11 @@ k = findobj('Color', Kvector);
 if P ~= 0
     % Legend for condition with phage treatment
     v = [g(1) i(1) h(1) j(1)];
-    h_leg = legend(v, 'phages','host immunity','BP','BA', 'Location', 'northeast');
+    h_leg = legend(v, 'phages','host immunity','BP','BA', 'Location', 'southeast');
 else
     % Legend for condition with NO phage treatment
     v = [i(1) h(1) j(1)];
-    h_leg = legend(v,'host immunity','BP','BA', 'Location','northeast');
+    h_leg = legend(v,'host immunity','BP','BA', 'Location','southeast');
 end
 
 if long_run
@@ -104,3 +98,4 @@ set(gca,'FontSize',20,'fontweight','bold')
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
 title({"Phage-Antibiotic + Immune response against a B_{A} inoculum"; "MIC_{CP} for B_{P} = 0.172 \mug/ml, MIC_{CP} for B_{A} = 0.014 \mug/ml"}, 'FontSize', 20)
+text(0.02, 0.95, 'd)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')

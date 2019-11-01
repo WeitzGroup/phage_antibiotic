@@ -15,17 +15,12 @@ P = 7.4e8;  % phage treatment
 %P = 0;     % no phage treatment
 
 % Antibiotic parameters for Ciprofloxacin
-dose = 0.014*2.5; % ug/ml
+dose = 0.014*2.5; % antibiotic dose, ug/ml
 anti_name = 'CP'; 
 
-% Antibiotic parameters for Ceftazidime
-%suggested_dosage = [0:10:600]*0.025;
-%dose = suggested_dosage(1);
-%dosing_interval = 0;
-%anti_name = 'CAZ';
 
 
-% Simulate phage-antibiotic combination therapy against an
+% Simulate phage-antibiotic combinatio10000n therapy against an
 % phage-sensitive inoculum
 [y, TB, time] = simRHM_WT(Ki, Io, B, 0, P, dose, anti_name);
 
@@ -75,11 +70,11 @@ k = findobj('Color', Kvector);
 if P ~= 0
     % Legend for condition with phage treatment
     v = [g(1) i(1) h(1) j(1)];
-    h_leg = legend(v, 'phage','host immunity','BP','BA', 'Location', 'northeast');
+    h_leg = legend(v, 'phage','host immunity','BP','BA', 'Location', 'southeast');
 else
     % Legend for condition with NO phage treatment
     v = [i(1) h(1) j(1)];
-    h_leg = legend(v,'host immunity','BP','BA', 'Location','northeast');
+    h_leg = legend(v,'host immunity','BP','BA', 'Location','southeast');
 end
 
 if long_run
@@ -98,4 +93,8 @@ set(gca,'FontSize',20,'fontweight','bold')
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
 title({"Phage-Antibiotic combination + Immune response"; "B_{P} inoculum, HM model"}, 'FontSize', 20, 'fontweight', 'bold')
+text(0.02, 0.95, 'a)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
+%title({"Antibiotic (1 MIC)+ Phage + Immune"; "Inoculum proportions: 50% B_P, 50% B_A"}, 'FontSize', 20, 'fontweight', 'bold')
+
+
 
