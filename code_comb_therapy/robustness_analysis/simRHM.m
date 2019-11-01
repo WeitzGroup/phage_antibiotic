@@ -126,7 +126,7 @@ function [ y, TB, time ] = simRHM( Ki, immune, Bp, Ba, phage, varargin )
 
     check = 0;
     currentTime = t2(end);
-    if currentTime < 96 % Bacterial pop died before end of simulation
+    if currentTime < 95.99 % Bacterial pop. died before end of simulation
         check = 1;
         B2 = y2(end,1);
         if B2 <= 1
