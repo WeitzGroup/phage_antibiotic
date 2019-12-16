@@ -157,44 +157,120 @@ clear
 
 %% Supplementary figures
 
-% Fig. S1 Bacterial dynamics of the partial resistance model
-% Caption: Time series of the partial resistance model in presence and absence of host immune response. We simulate
-% the combination of phage and antibiotic against a phage-sensitive (a) and an antibiotic-sensitive (b) bacterial inoculum in the
-% absence of the immune response. Moreover, we simulate a within-host scenario where the combined therapy interact with the
-% immune response (purple dashed line) and phage-sensitive bacteria (c) or antibiotic-sensitive bacteria (d). Here, phage (blue
-% dashed line) and antibiotic are administered two hours after the infection. Initial conditions are, B0 = 7.4 x 10^7 CFU/g and
-% P0 = 7.4x 10^8 PFU/g. The concentration of antibiotic (0.0350 ug/ml = 2.5 x MIC for BA strain) is maintained constant during
-% the simulation, data not shown. The simulation run was 96 hours (4 days).
 
-% Fig. S1A
-figure(15)
-run([pwd '/code_comb_therapy/extended_model/neutropenic/RHM_neutropenia.m'])
-saveas(gcf, [pwd '/figures/time_series/FigS1A'], 'fig')
-saveas(gcf,[pwd '/figures/time_series/FigS1A'],'epsc')
+% Fig S1. Bacterial dynamics given exposure to low levels of antibiotic.
+% Caption: We simulate the effects of combination therapy
+% plus innate immunity on inocula with non-trivial levels of BA. First, an inoculum composed of 95% BP and 5% BA is treated
+% with phage and different levels of antibiotic, 0, 0.01, and 0.001 X MIC (a, b, and c respectively). The same treatment is
+% applied for an inoculum composed of 80% BP and 20% BA (d, e, and f, respectively). Initial bacterial and phage density are,
+% B0 = 7.4 x 10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g. Phage and antibiotic are administered two hours after infection. The
+% simulation run was 96 hours (4 days).
+
+% Fig. S1 A-B-C-D-E-F
+run([pwd '/code_comb_therapy/immunocompetent/HM-R_model/Phage_antibio_immune/FigS1_lowanti/RHM_WT.m'])
+letters = {'A' 'B' 'C' 'D' 'E' 'F'};
+for fig_num = 1:6,
+    saveas(figure(fig_num),[pwd '/figures/time_series/FigS1' letters{fig_num}], 'fig')
+    saveas(figure(fig_num),[pwd '/figures/time_series/FigS1' letters{fig_num}],'epsc')
+end
 clear
 
-% Fig. S1B
-figure(16)
-run([pwd '/code_comb_therapy/extended_model/neutropenic/RHM_neutropenia_BA.m'])
-saveas(gcf, [pwd '/figures/time_series/FigS1B'], 'fig')
-saveas(gcf,[pwd '/figures/time_series/FigS1B'],'epsc')
+% Fig S2. Accounting for variations in the concentration of antibiotic,
+% from sub-MIC to MIC levels.
+% Caption: We choose a particular inoculum composition (red boxes, 50%BP and 50%BA) from our heatmap 
+% and zoom in at the dynamics level. Bacterial dynamics correspond to different antibiotic levels: 
+% 0.1, 0.5, and 1 X MIC levels (a, b, and c, respectively ). The colored areas on the heatmap indicate 
+% bacterial presence while the white areas indicate infection clearance after 96 hrs of treatment. 
+% Phage and antibiotic are administered two hours after infection. Initial bacterial and phage density, 
+% B0 = 7.4 x10^7 CFU/g and P0 = 7.4 x10^8 PFU/g, respectively.
+
+% Fig. S2 A-B-C
+run([pwd '/code_comb_therapy/immunocompetent/HM-R_model/Phage_antibio_immune/FigS2_SubtoMIC_levels/RHM_WT.m'])
+letters = {'C' 'B' 'A'};
+for fig_num = 1:3,
+    saveas(figure(fig_num),[pwd '/figures/time_series/FigS2' letters{fig_num}], 'fig')
+    saveas(figure(fig_num),[pwd '/figures/time_series/FigS2' letters{fig_num}],'epsc')
+end
 clear
 
-% Fig. S1C
-figure(17)
-run([pwd '/code_comb_therapy/extended_model/immunocompetent/RHM_WT.m'])
-saveas(gcf, [pwd '/figures/time_series/FigS1C'], 'fig')
-saveas(gcf,[pwd '/figures/time_series/FigS1C'],'epsc')
+% Fig. S2 A+P+I(Heatmap)
+figure(23)
+run([pwd '/code_comb_therapy/robustness_analysis/Figure_s2_tripartiteffect.m'])
+saveas(gcf,[pwd '/figures/heatmaps/FigS2_heatmap'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS2_heatmap'],'epsc')
 clear
 
-% Fig. S1D
-figure(18)
-run([pwd '/code_comb_therapy/extended_model/immunocompetent/RHM_WT_BA.m'])
-saveas(gcf, [pwd '/figures/time_series/FigS1D'], 'fig')
-saveas(gcf,[pwd '/figures/time_series/FigS1D'],'epsc')
+% Fig S3. Bacterial density after 96 h of combined treatment with intermediate innate immunity levels.
+% Caption: We extend our robustness analysis of Figure 5 (bottom) to account for intermediate levels of
+% innate immune activation in the context of combined therapy. We vary the levels of innate immune response 
+% activation from 20% to 100% (a, b, c, d, and e). Bacterial density is calculated after 96 hr of treatment. 
+% Colored regions represent bacterial presence while white regions indicate infection clearance. Phage and 
+% antibiotic are administered two hours after infection. Antibiotic levels vary from 0.1 to 10 X MIC 
+% (MIC of ciprofloxacin = 0.014ug/ml). Initial bacterial and phage density are, B0 = 7.4 x 10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g, respectively.
+
+
+% Fig. S3-Heatmaps
+figure(24)
+run([pwd '/code_comb_therapy/robustness_analysis/phage_anti_immunomodulation.m'])
+saveas(gcf,[pwd '/figures/heatmaps/FigS3'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS3'],'epsc')
 clear
 
-% Fig S2. Robustness analysis of the partial resistance model
+% Fig S4. Time delays in the application of the combined treatment.
+% Caption: We extend our robustness analysis of Figure 5 (bottom) to account for time delays in the start 
+% of the combined treatment. Phage and antibiotic were administered simultaneously 2, 4, 6, 8, and 10 hours 
+% after the beginning of the infection in the presence (Fig. S6-top) or absence (Fig. S6-bottom) of innate 
+% immunity. Colored regions on the heatmaps indicate bacterial presence while white regions indicate infection
+% clearance. Antibiotic levels vary from 0.1 to 10 X MIC (MIC of ciprofloxacin = 0.014ug/ml). Initial bacterial 
+% and phage density are, B0 = 7.4 x10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g, respectively.
+
+% Fig. S4-Left column (immunocompetence)
+% figure(25)
+run([pwd '/code_comb_therapy/robustness_analysis/combination_immune_variedtiming.m'])
+
+save_label = {'A', 'B', 'C', 'D', 'E'};
+for fig_num = 1:5,
+    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS4' save_label{fig_num}],'fig')
+    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS4' save_label{fig_num}],'epsc')
+end
+clear
+
+% Fig. S4-Right column (neutropenic)
+% figure(26)
+run([pwd '/code_comb_therapy/robustness_analysis/phage_anti_variedtiming.m'])
+
+save_label = {'F', 'G', 'H', 'I', 'J'};
+for fig_num = 1:5,
+    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS4' save_label{fig_num}],'fig')
+    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS4' save_label{fig_num}],'epsc')
+end
+clear
+
+
+% Fig S5. Parameter sensitivity analysis results.
+% Caption: We show the distribution of the fraction of complete elimination for two therapeutic regimes
+% A + P + I (blue) and A + P (red). We performed 1000 runs using perturbed parameter sets (\theta_per) and
+% calculate the fraction of bacterial elimination for the two regimes. Moreover, we show the fraction of complete elimination for
+% A + P + I (blue square) and A + P (red triangle) using the reference parameter set (\theta_ref ).
+
+% NOTE: It takes ~8hrs to run the parameter sensitivity analysis for both regimes for 1000 iterations. So I'll just provide
+% the data generated from the sensitivity analysis so I (and you) can generate the
+% Figure S7 from the paper.
+
+% Fig. S5
+figure(27)
+run([pwd '/code_comb_therapy/robustness_analysis/FigS5_param_sensitivity.m'])
+saveas(gcf,[pwd '/figures/distributions/FigS5'], 'fig')
+saveas(gcf,[pwd '/figures/distributions/FigS5'],'epsc')
+clear
+
+% Uncomment the following line of code if you want to run yourself the paramater sensitivity analysis for 1000 iterations
+% the following line of code will also generate the figures from the
+% generated data.
+
+% run([pwd '/code_comb_therapy/robustness_analysis/param_sens_AP_API.m'])
+
+% Fig S6. Robustness analysis of the partial resistance model
 % Caption: Bacteria grew for 96 hours exposed to diferent antimicrobial strategies, antibiotic-only (a), antibiotic + innate immunity (b), phages and antibiotic (c),
 % and phage-antibiotic combination plus active innate immunity (d). The heatmaps show the bacterial density at 96 hours post
 % infection. Colored regions represent bacteria persistence while the clearance of the infection is represented by white regions.
@@ -207,143 +283,67 @@ clear
 % after the beginning of the infection.
 
 
-% Fig. S2A
+% Fig. S6A
 figure(19)
 run([pwd '/code_comb_therapy/extended_model/neutropenic/heatmap_antibio_partres.m'])
-saveas(gcf, [pwd '/figures/heatmaps/FigS2A'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS2A'],'epsc')
+saveas(gcf, [pwd '/figures/heatmaps/FigS6A'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS6A'],'epsc')
 clear
 
-% Fig. S2B
+% Fig. S6B
 figure(20)
 run([pwd '/code_comb_therapy/extended_model/immunocompetent/heatmap_anti_immune_partres.m'])
-saveas(gcf, [pwd '/figures/heatmaps/FigS2B'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS2B'],'epsc')
+saveas(gcf, [pwd '/figures/heatmaps/FigS6B'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS6B'],'epsc')
 clear
 
-% Fig. S2C
+% Fig. S6C
 figure(21)
 run([pwd '/code_comb_therapy/extended_model/neutropenic/heatmap_anti_phage_partres.m'])
-saveas(gcf, [pwd '/figures/heatmaps/FigS2C'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS2C'],'epsc')
+saveas(gcf, [pwd '/figures/heatmaps/FigS6C'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS6C'],'epsc')
 clear
 
-% Fig. S2D
+% Fig. S6D
 figure(22)
 run([pwd '/code_comb_therapy/extended_model/immunocompetent/heatmap_anti_phage_immune_partres.m'])
-saveas(gcf, [pwd '/figures/heatmaps/FigS2D'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS2D'],'epsc')
+saveas(gcf, [pwd '/figures/heatmaps/FigS6D'], 'fig')
+saveas(gcf,[pwd '/figures/heatmaps/FigS6D'],'epsc')
 clear
 
-% Fig S3. Bacterial dynamics given exposure to low levels of antibiotic.
-% Caption: We simulate the effects of combination therapy
-% plus innate immunity on inocula with non-trivial levels of BA. First, an inoculum composed of 95% BP and 5% BA is treated
-% with phage and different levels of antibiotic, 0, 0.01, and 0.001 X MIC (a, b, and c respectively). The same treatment is
-% applied for an inoculum composed of 80% BP and 20% BA (d, e, and f, respectively). Initial bacterial and phage density are,
-% B0 = 7.4 x 10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g. Phage and antibiotic are administered two hours after infection. The
-% simulation run was 96 hours (4 days).
+% Fig. S7 Bacterial dynamics of the partial resistance model
+% Caption: Time series of the partial resistance model in presence and absence of host immune response. We simulate
+% the combination of phage and antibiotic against a phage-sensitive (a) and an antibiotic-sensitive (b) bacterial inoculum in the
+% absence of the immune response. Moreover, we simulate a within-host scenario where the combined therapy interact with the
+% immune response (purple dashed line) and phage-sensitive bacteria (c) or antibiotic-sensitive bacteria (d). Here, phage (blue
+% dashed line) and antibiotic are administered two hours after the infection. Initial conditions are, B0 = 7.4 x 10^7 CFU/g and
+% P0 = 7.4x 10^8 PFU/g. The concentration of antibiotic (0.0350 ug/ml = 2.5 x MIC for BA strain) is maintained constant during
+% the simulation, data not shown. The simulation run was 96 hours (4 days).
 
-% Fig. S3 A-B-C-D-E-F
-run([pwd '/code_comb_therapy/immunocompetent/HM-R_model/Phage_antibio_immune/FigS3_lowanti/RHM_WT.m'])
-letters = {'A' 'B' 'C' 'D' 'E' 'F'};
-for fig_num = 1:6,
-    saveas(figure(fig_num),[pwd '/figures/time_series/FigS3' letters{fig_num}], 'fig')
-    saveas(figure(fig_num),[pwd '/figures/time_series/FigS3' letters{fig_num}],'epsc')
-end
+% Fig. S7A
+figure(15)
+run([pwd '/code_comb_therapy/extended_model/neutropenic/RHM_neutropenia.m'])
+saveas(gcf, [pwd '/figures/time_series/FigS7A'], 'fig')
+saveas(gcf,[pwd '/figures/time_series/FigS7A'],'epsc')
 clear
 
-% Fig S4. Accounting for variations in the concentration of antibiotic,
-% from sub-MIC to MIC levels.
-% Caption: We choose a particular inoculum composition (red boxes, 50%BP and 50%BA) from our heatmap 
-% and zoom in at the dynamics level. Bacterial dynamics correspond to different antibiotic levels: 
-% 0.1, 0.5, and 1 X MIC levels (a, b, and c, respectively ). The colored areas on the heatmap indicate 
-% bacterial presence while the white areas indicate infection clearance after 96 hrs of treatment. 
-% Phage and antibiotic are administered two hours after infection. Initial bacterial and phage density, 
-% B0 = 7.4 x10^7 CFU/g and P0 = 7.4 x10^8 PFU/g, respectively.
-
-% Fig. S4 A-B-C
-run([pwd '/code_comb_therapy/immunocompetent/HM-R_model/Phage_antibio_immune/FigS4_SubtoMIC_levels/RHM_WT.m'])
-letters = {'C' 'B' 'A'};
-for fig_num = 1:3,
-    saveas(figure(fig_num),[pwd '/figures/time_series/FigS4' letters{fig_num}], 'fig')
-    saveas(figure(fig_num),[pwd '/figures/time_series/FigS4' letters{fig_num}],'epsc')
-end
+% Fig. S7B
+figure(16)
+run([pwd '/code_comb_therapy/extended_model/neutropenic/RHM_neutropenia_BA.m'])
+saveas(gcf, [pwd '/figures/time_series/FigS7B'], 'fig')
+saveas(gcf,[pwd '/figures/time_series/FigS7B'],'epsc')
 clear
 
-% Fig. S4 A+P+I(Heatmap)
-figure(23)
-run([pwd '/code_comb_therapy/robustness_analysis/Figure_s4_tripartiteffect.m'])
-saveas(gcf,[pwd '/figures/heatmaps/FigS4_heatmap'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS4_heatmap'],'epsc')
+% Fig. S7C
+figure(17)
+run([pwd '/code_comb_therapy/extended_model/immunocompetent/RHM_WT.m'])
+saveas(gcf, [pwd '/figures/time_series/FigS7C'], 'fig')
+saveas(gcf,[pwd '/figures/time_series/FigS7C'],'epsc')
 clear
 
-% Fig S5. Bacterial density after 96 h of combined treatment with intermediate innate immunity levels.
-% Caption: We extend our robustness analysis of Figure 5 (bottom) to account for intermediate levels of
-% innate immune activation in the context of combined therapy. We vary the levels of innate immune response 
-% activation from 20% to 100% (a, b, c, d, and e). Bacterial density is calculated after 96 hr of treatment. 
-% Colored regions represent bacterial presence while white regions indicate infection clearance. Phage and 
-% antibiotic are administered two hours after infection. Antibiotic levels vary from 0.1 to 10 X MIC 
-% (MIC of ciprofloxacin = 0.014ug/ml). Initial bacterial and phage density are, B0 = 7.4 x 10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g, respectively.
-
-
-% Fig. S5-Heatmaps
-figure(24)
-run([pwd '/code_comb_therapy/robustness_analysis/phage_anti_immunomodulation.m'])
-saveas(gcf,[pwd '/figures/heatmaps/FigS5'], 'fig')
-saveas(gcf,[pwd '/figures/heatmaps/FigS5'],'epsc')
+% Fig. S7D
+figure(18)
+run([pwd '/code_comb_therapy/extended_model/immunocompetent/RHM_WT_BA.m'])
+saveas(gcf, [pwd '/figures/time_series/FigS7D'], 'fig')
+saveas(gcf,[pwd '/figures/time_series/FigS7D'],'epsc')
 clear
-
-% Fig S6. Time delays in the application of the combined treatment.
-% Caption: We extend our robustness analysis of Figure 5 (bottom) to account for time delays in the start 
-% of the combined treatment. Phage and antibiotic were administered simultaneously 2, 4, 6, 8, and 10 hours 
-% after the beginning of the infection in the presence (Fig. S6-top) or absence (Fig. S6-bottom) of innate 
-% immunity. Colored regions on the heatmaps indicate bacterial presence while white regions indicate infection
-% clearance. Antibiotic levels vary from 0.1 to 10 X MIC (MIC of ciprofloxacin = 0.014ug/ml). Initial bacterial 
-% and phage density are, B0 = 7.4 x10^7 CFU/g and P0 = 7.4 x 10^8 PFU/g, respectively.
-
-% Fig. S6-Left column (immunocompetence)
-%figure(25)
-run([pwd '/code_comb_therapy/robustness_analysis/combination_immune_variedtiming.m'])
-
-save_label = {'A', 'B', 'C', 'D', 'E'};
-for fig_num = 1:5,
-    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS6' save_label{fig_num}],'fig')
-    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS6' save_label{fig_num}],'epsc')
-end
-clear
-
-% Fig. S6-Right column (neutropenic)
-%figure(26)
-run([pwd '/code_comb_therapy/robustness_analysis/phage_anti_variedtiming.m'])
-
-save_label = {'F', 'G', 'H', 'I', 'J'};
-for fig_num = 1:5,
-    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS6' save_label{fig_num}],'fig')
-    saveas(figure(fig_num),[pwd '/figures/heatmaps/FigS6' save_label{fig_num}],'epsc')
-end
-clear
-
-
-% Fig S7. Parameter sensitivity analysis results.
-% Caption: We show the distribution of the fraction of complete elimination for two therapeutic regimes
-% A + P + I (blue) and A + P (red). We performed 1000 runs using perturbed parameter sets (\theta_per) and
-% calculate the fraction of bacterial elimination for the two regimes. Moreover, we show the fraction of complete elimination for
-% A + P + I (blue square) and A + P (red triangle) using the reference parameter set (\theta_ref ).
-
-% NOTE: It takes ~8hrs to run the parameter sensitivity analysis for both regimes for 1000 iterations. So I'll just provide
-% the data generated from the sensitivity analysis so I (and you) can generate the
-% Figure S7 from the paper.
-
-% Fig. S7
-figure(27)
-run([pwd '/code_comb_therapy/robustness_analysis/FigS7_param_sensitivity.m'])
-saveas(gcf,[pwd '/figures/distributions/FigS7'], 'fig')
-saveas(gcf,[pwd '/figures/distributions/FigS7'],'epsc')
-clear
-
-% Uncomment the following line of code if you want to run yourself the paramater sensitivity analysis for 1000 iterations
-% the following line of code will also generate the figures from the
-% generated data.
-
-% run([pwd '/code_comb_therapy/robustness_analysis/param_sens_AP_API.m'])
-
