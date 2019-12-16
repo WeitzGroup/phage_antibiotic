@@ -1,34 +1,38 @@
-% Code to simulate Phage-Antibiotic combination therapy on heterogeneous mixing model (ODE)
-% Inoculum: Antibiotic-sensitive bacteria (BP)
+% Code to simulate Phage-Antibiotic combination therapy, Phage saturation model (ODE)
+% Immunocompetent host
+% Inoculum: Phage-sensitive bacteria (BP)
 % Phage and Antibiotic added two hours after infection
-% Dependencies: (1) rhmODE.m (2)simRHM_WT.m (3) myEventsFcn.m
+% Dependencies: (1) rpsODE.m (2)simRPS_WT.m (3) myEventsFcn.m
 
 clear
 clc
 close all
 
 % Immunocompetence parameters:
-Ki = 2.4e7; % Carrying capacity of the immune response
-Io = 2.7e6; % Initial immune response
-B = 7.4e7;  % Initial bacterial inoculum
+Ki = 2.4e7; % Maximum carrying capacity of the immune response
+Io = 2.7e6; % Initial Immune response
+B = 7.4e7;  % Bacterial inoculum 
 P = 7.4e8; % phage treatment
 %P = 0; % no phage treatment
 
 % Antibiotic parameters for Ciprofloxacin
+
 dose = 0.014*2.5; % ug/ml
-anti_name = 'CP'; 
+anti_name = 'CP'; % ciprofloxacin
 
+% Antibiotic parameters for Ceftazidime
+%suggested_dosage = [0:10:600]*0.025;
+%dose = suggested_dosage(1);
+%dosing_interval = 0;
+%anti_name = 'CAZ';
 
-
-% Simulate phage-antibiotic combination therapy against an
-% antibiotic-sensitive inoculum
-[y, TB, time] = simRHM_WT(Ki, Io, 0, B, P, dose, anti_name);
-
+% Simulate combination therapy against phage-sensitive inoculum under a
+% phage-saturation context
+[y, TB, time] = simRPS_WT(Ki, Io, 0, B, P, dose, anti_name);
 
 %----------------------------------------
 % plotting
 %----------------------------------------
-
 % Do you want to show long run simulation (300 h)?
 long_run = 0; % 1 for long run sim.
 
@@ -50,8 +54,6 @@ hold on;
 semilogy(time,y(:,2),'Color', Rvector,'Linewidth',3.5)
 semilogy(time,y(:,3),'LineStyle','--','Color', Pvector,'Linewidth',3.5)
 semilogy(time,y(:,4),'LineStyle','--','Color', Ivector,'Linewidth',3.5)
-%semilogy(time,y(:,5),'LineStyle','-','Color', Avector,'Linewidth',2)
-
 
 %-----------------------------------------------------
 xlabel('Hours post infection', 'FontSize', 16,'fontweight','bold')
@@ -71,11 +73,11 @@ k = findobj('Color', Kvector);
 if P ~= 0
     % Legend for condition with phage treatment
     v = [g(1) i(1) h(1) j(1)];
-    h_leg = legend(v, 'phage','host immunity','BP','BA', 'Location', 'southeast');
+    h_leg = legend(v, 'phages','host immunity','BP','BA', 'Location', 'northeast');
 else
     % Legend for condition with NO phage treatment
     v = [i(1) h(1) j(1)];
-    h_leg = legend(v,'host immunity','BP','BA', 'Location','southeast');
+    h_leg = legend(v,'host immunity','BP','BA', 'Location','northeast');
 end
 
 if long_run
@@ -91,10 +93,9 @@ else
 end
 legend boxoff
 set(gca,'FontSize',20,'fontweight','bold')
+%set(gca, 'Units','inches','Position',[1 1 3 2.5])
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
-title(["Phage-Antibiotic combination + Immune response"; "B_{A} inoculum, HM model"], 'FontSize', 20, 'fontweight', 'bold')
-text(0.02, 0.95, 'b)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
-%title(["Combined therapy + Immune response against B_{A} inoculum"; "Heterogeneous mixing model"], 'FontSize', 20, 'fontweight', 'bold')
-%set(gcf, 'position', [440   369   602   429])
-%text(0.02, 0.95, 'd)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
+set(gcf, 'position', [440   369   602   429])
+title(["Combined therapy + Immune response against B_{A} inoculum"; "Phage saturation model"], 'FontSize', 20, 'fontweight', 'bold')
+text(0.02, 0.95, 'e)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
