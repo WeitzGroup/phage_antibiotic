@@ -87,13 +87,15 @@ else
 end
 
 if dose > 0 && dose < 1
-    axis([0,end_sim,1,1e15])
+    axis([0,end_sim,1,1e13])
 else
-    axis([0,end_sim,1,1e15])
+    axis([0,end_sim,1,1e13])
 end
 legend boxoff
 set(gca,'FontSize',20,'fontweight','bold')
 %set(gca, 'Units','inches','Position',[1 1 3 2.5])
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
-title({["Phage-Antibiotic combination + Immune response"; "B_{P} inoculum, PS model"]}, 'FontSize', 20, 'fontweight', 'bold')
+set(gcf, 'position', [440   369   602   429])
+title(["Combined therapy + Immune response against B_{P} inoculum"; "Phage saturation model"], 'FontSize', 20, 'fontweight', 'bold')
+text(0.02, 0.95, 'b)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')

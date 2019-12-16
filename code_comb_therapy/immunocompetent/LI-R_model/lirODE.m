@@ -1,6 +1,6 @@
-%Combination therapy heterogeneous mixing model ODE
+% Phage resistant heterogeneous mixing model ODE
 
-function [ dx ] = rhmODE( t, x, p )
+function [ dx ] = lirODE( t,x,p )
 
 dx = [0;0;0;0;0];
 
@@ -13,8 +13,6 @@ rp = p.rp;
 Kc = p.Kc;
 % nonlinear adsorption rate of phage:
 phi = p.phi;
-% power law exponent in phage infection:
-g = p.g;
 % immune response killing rate parameter:
 ep = p.ep;
 % bacterial conc. at which immune response is half as effective:
@@ -55,12 +53,12 @@ A = x(5);
 
 % Change in susceptible bacterial population
 %dx(1) = (r*B*(1-((B+R)/Kc))*(1-m))-(phi*B*(P^g))-(ep*I*B/(1+((B+R)/Kd)));
-dx(1) = (r*B*(1-((B+R)/Kc))*(1-m))-(phi*B*(P^g))-(ep*I*B/(1+((B+R)/Kd)))+ rp*R*(1-((B+R)/Kc))*m2; % with reversible mutation
+dx(1) = (r*B*(1-((B+R)/Kc))*(1-m))-(phi*B*P)-(ep*I*B/(1+((B+R)/Kd)))+ rp*R*(1-((B+R)/Kc))*m2; % with reversible mutation
 % Change in resistant bacterial population
 %dx(2) = ((rp*R*(1-((B+R)/Kc)))+r*B*(1-((B+R)/Kc))*m)-(ep*I*R/(1+((B+R)/Kd))) -((kkill*(A^H)*R)/(ec^H + A^H));
 dx(2) = ((rp*R*(1-((B+R)/Kc)))*(1-m2)+r*B*(1-((B+R)/Kc))*m)-(ep*I*R/(1+((B+R)/Kd))) -((kkill*(A^H)*R)/(ec^H + A^H)); % with reversible mutation
 % Change in phage population
-dx(3) = (beta*phi*B*(P^g))-(w*P);
+dx(3) = (beta*phi*B*P)-(w*P);
 % Change immune response
 dx(4) = a*I*((B+R)/(B+R+Kn))*(1-(I/Ki));
 % Change in antibiotic

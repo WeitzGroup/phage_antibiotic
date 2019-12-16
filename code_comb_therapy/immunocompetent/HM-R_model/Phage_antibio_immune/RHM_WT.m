@@ -92,9 +92,9 @@ legend boxoff
 set(gca,'FontSize',20,'fontweight','bold')
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
-title({"Phage-Antibiotic combination + Immune response"; "B_{P} inoculum, HM model"}, 'FontSize', 20, 'fontweight', 'bold')
+title(["Phage-Antibiotic combination + Immune response"; "B_{P} inoculum, HM model"], 'FontSize', 20, 'fontweight', 'bold')
 text(0.02, 0.95, 'a)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
-%title({"Antibiotic (1 MIC)+ Phage + Immune"; "Inoculum proportions: 50% B_P, 50% B_A"}, 'FontSize', 20, 'fontweight', 'bold')
-
+%title(["Combined therapy + Immune response against B_{P} inoculum"; "Heterogeneous mixing model"], 'FontSize', 20, 'fontweight', 'bold')
+%set(gcf, 'position', [440   369   602   429])
 
 

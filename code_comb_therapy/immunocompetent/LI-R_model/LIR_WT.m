@@ -1,30 +1,32 @@
-% Code to simulate combination of phage and innate immune system on heterogeneous mixing model (ODE)
-% Inoculum: Antibiotic-sensitive bacteria (BA)
-% Phage added two hours after infections
-% Dependencies: (1) rhmODE.m (2)simRHM_WT.m (3) myEventsFcn.m
+% Code to simulate Combination Therapy-Linear Infection model (ODE)
+% Neutropenic host
+% Inoculum: Phage-sensitive bacteria (BP)
+% Phage and Antibiotic added two hours after infection
+% Dependencies: (1) rhmODE.m (2) simRHM.m (3) myEventsFcn.m
 
 clear
 clc
 close all
 
-% Immunocompetence parameters:
-Ki = 2.4e7; % Immune system maximum carrying capacity
-Io = 2.7e6; % Initial Immune response
-B = 7.4e7;  % Bacterial inoculum
+% Neutropenia parameters:
+Ki = 2.4e7; % maximum capacity of the immune response
+Io = 2.7e6;     % initial immune response
+B = 7.4e7;  % initial bacterial inoculum
 P = 7.4e8; % phage treatment
 %P = 0; % no phage treatment
 
 % Antibiotic parameters for Ciprofloxacin
-%dose = 0.014*2.5; % 2.5 x MIC of ciprofloxacing for BA
-dose = 0; % ug/ml
+
+dose = 0.014*2.5; % ug/ml, 2.5 x MIC of ciprofloxacin for BA strain
 anti_name = 'CP';
 
-% Antibiotic parameters for Ceftazidime
-%anti_name = 'CAZ';
-%dose = 0; 
 
-% Simulate immunophage model against an antibiotic-sensitive inocolum
-[y, TB, time] = simRHM_WT(Ki, Io, 0, B, P, dose, anti_name);
+
+
+% Simulate phage-antibiotic combination therapy model in the absence of
+% immune response against a phage-sensitive inoculum
+
+[y, TB, time] = simLIR(Ki, Io, B, 0, P, dose, anti_name);
 
 %----------------------------------------
 % plotting
@@ -46,13 +48,13 @@ Avector = [0 0 0];
 Kvector = [1 0 0];
 
 figure(1)
-semilogy(time,y(:,1),'Color', Bvector, 'Linewidth',3.5);
+semilogy(time, y(:,1),'Color', Bvector, 'Linewidth',3.5);
 hold on;
-semilogy(time,y(:,2),'Color', Rvector,'Linewidth',3.5)
-semilogy(time,y(:,3),'LineStyle','--','Color', Pvector,'Linewidth',3.5)
+semilogy(time, y(:,2),'Color', Rvector,'Linewidth',3.5)
+semilogy(time, y(:,3),'LineStyle','--','Color', Pvector,'Linewidth',3.5)
 semilogy(time,y(:,4),'LineStyle','--','Color', Ivector,'Linewidth',3.5)
-%semilogy(time,y(:,5),'LineStyle','-','Color', Avector,'Linewidth',2) 
-% we don't show antibiotic dynamics (we assume it has relatively fast dynamics and use a quasi-steady state approximation)
+%semilogy(time(3:end), y(3:end, 5),'LineStyle','-','Color', Avector,'Linewidth',2)
+
 
 %-----------------------------------------------------
 xlabel('Hours post infection', 'FontSize', 16,'fontweight','bold')
@@ -71,12 +73,12 @@ k = findobj('Color', Kvector);
 
 if P ~= 0
     % Legend for condition with phage treatment
-    v = [g(1) i(1) h(1) j(1)];
-    h_leg = legend(v, 'phage', 'host immunity','BP','BA', 'Location', 'northeast');
+    v = [g(1) h(1) j(1) i(1)];
+    h_leg = legend(v, 'phage','BP','BA', 'host immunity', 'Location','northeast');
 else
-    % Legend for condition with NO phage treatment
-    v = [i(1) h(1) j(1)];
-    h_leg = legend(v,'host immunity','BP','BA', 'Location','northeast');
+    % Legend for condition with phage treatment
+    v = [ h(1) j(1)];
+    h_leg = legend(v, 'BP','BA', 'Location','northeast');
 end
 
 if long_run
@@ -85,14 +87,17 @@ else
     end_sim = 96;
 end
 
-if dose > 0 && dose < 1
-    axis([0,end_sim,1,1e13])
+if dose > 0 && dose <= 1
+    axis([0, end_sim, 1, 1e13])
 else
-    axis([0,end_sim,1,1e13])
+    axis([0, end_sim, 1, 1e13])
 end
+
 legend boxoff
 set(gca,'FontSize',20,'fontweight','bold')
 %set(gca, 'Units','inches','Position',[1 1 3 2.5])
 set(h_leg, 'FontSize',20,'fontweight','normal')
 set(gcf,'PaperPositionMode','manual','PaperPosition',[0.25 2.5 8 6],'PaperUnits','inches')
-title("Immunophage therapy, B_{A} inoculum", 'FontSize', 20, 'fontweight', 'bold')
+title(["Combined therapy + Immune response against B_{P} inoculum"; "Linear infection model"], 'FontSize', 20)
+set(gcf, 'position', [440   369   602   429])
+text(0.02, 0.95, 'c)', 'units', 'normalized', 'FontSize',16,'fontweight', 'bold')
